@@ -12,7 +12,7 @@ def getdata():
         "code": [],
         "name": []
     }
-    for i in range(0, len(codes)):
+    for i in range(len(codes)):
         if codes.index[i].startswith("3") or codes.name[i].startswith(
                 "*ST") or codes.name[i].startswith("N"):
             continue
@@ -48,9 +48,11 @@ def handleData(data):
     max_high = 0
     max_date = ""
     sorted = data.sort_values(by="high", ascending=False)  # 降序排列
-    max_high = sorted.head(0)["high"]
-    max_date = sorted.head(0)["date"]
+    max_high = sorted.iloc[1].high
+    max_date = sorted.iloc[1].name
     sorted = data.sort_values(by="low")  # 升序排列
-    min_low = sorted.head(0)["low"]
-    min_date = sorted.head(0)["date"]
+    min_low = sorted.iloc[1].low
+    min_date = sorted.iloc[1].name
+
+
 getdata()
