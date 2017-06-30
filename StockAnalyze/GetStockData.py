@@ -86,6 +86,7 @@ def handleWdata(data):
         return False
     if (data.iloc[1].ma50 <= data.iloc[1].ma100):
         return False
+    
     return True
 
 
