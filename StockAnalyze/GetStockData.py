@@ -110,5 +110,4 @@ def handleWdata(data):
         return False
     return True
 
-
 getdata()
