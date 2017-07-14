@@ -6,7 +6,7 @@ import os
 import http.cookiejar
 
 
-# 抓取MM
+# 爬虫抓取
 class Spider:
 
     # 页面初始化
