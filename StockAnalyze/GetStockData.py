@@ -1,6 +1,8 @@
+# coding = utf-8
 import tushare as ts
 import datetime
 import pandas as pd
+from OneStockAnalyze import OneStockAnalyze
 
 
 def getdata():
@@ -25,11 +27,12 @@ def getdata():
     tmpName = result["name"]
     for val in codes.iterrows():
         if val[0].startswith("3") or val[1]["name"].startswith(
-                "*ST") or val[1]["name"].startswith("N") or val[1]["timeToMarket"] > yearpre2:
+                "*ST") or val[1]["name"].startswith(
+                    "N") or val[1]["timeToMarket"] > yearpre2:
             continue
         tmpCode.append(val[0])
         tmpName.append(val[1]["name"])
- 
+
     # for i in range(0, len(codelist)):
     #    print(codelist.iloc[i]["code"] + " " * 7 + codelist.iloc[i]["name"])
     now = datetime.datetime.now()
@@ -110,4 +113,63 @@ def handleWdata(data):
         return False
     return True
 
-getdata()
+
+'''
+双塔 002481
+龙力 002604
+光洋 002708
+'''
+'''
+code = "002708"
+start = datetime.datetime.now()
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze = OneStockAnalyze(code)
+stock_analyze.AnalyzeData(code, start)
+print(stock_analyze)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-3)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+start = start + datetime.timedelta(-1)
+print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
+stock_analyze.AnalyzeData(code, start)
+
+# getdata()
+# 行业
+data_industry = ts.get_industry_classified()
+data_industry = data_industry[data_industry["c_name"].str.contains('汽车')]
+
+# 地区
+data_area = ts.get_area_classified()
+data_area = data_area[data_area["area"].str.contains("上海")]
+# 概念
+data_gn = ts.get_concept_classified()
+data_gn = data_gn[data_gn["c_name"].str.contains("特斯拉")]
+join_df = data_gn.merge(data_area, on="code", how="inner")
+
+print(ts.get_index())
+'''
+dict = {"a": {"d": 5, "e": 6}, "b": {"f": 5, "g": 6}}
+for key, value in dict.items():
+    print(value.keys())
