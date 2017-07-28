@@ -2,6 +2,7 @@
 import tushare as ts
 import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 from OneStockAnalyze import OneStockAnalyze
 
 
@@ -118,43 +119,18 @@ def handleWdata(data):
 双塔 002481
 龙力 002604
 光洋 002708
-'''
-'''
+
+
 code = "002708"
-start = datetime.datetime.now()
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze = OneStockAnalyze(code)
-stock_analyze.AnalyzeData(code, start)
-print(stock_analyze)
+start = datetime.datetime.now() - datetime.timedelta(200)
+data = ts.get_hist_data(code, start.strftime("%Y-%m-%d"))
+data = data[::-1]
+ShowCandle.pandas_candlestick_ohlc(data)
 
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
+'''
 
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
 
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
-
-start = start + datetime.timedelta(-3)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
-
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
-
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
-
-start = start + datetime.timedelta(-1)
-print("*" * 30 + start.strftime("%Y-%m-%d") + "*" * 30)
-stock_analyze.AnalyzeData(code, start)
-
+'''
 # getdata()
 # 行业
 data_industry = ts.get_industry_classified()
@@ -170,6 +146,3 @@ join_df = data_gn.merge(data_area, on="code", how="inner")
 
 print(ts.get_index())
 '''
-dict = {"a": {"d": 5, "e": 6}, "b": {"f": 5, "g": 6}}
-for key, value in dict.items():
-    print(value.keys())

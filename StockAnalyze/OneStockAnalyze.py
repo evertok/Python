@@ -38,9 +38,3 @@ class OneStockAnalyze():
                 sorted = data.sort_values(["type", "volume"], ascending=[False, False])
                 for i in sorted.values:
                     print(i)
-
-    '''
-    私有方法
-    '''
-    def __str__(self):
-        return self.code
